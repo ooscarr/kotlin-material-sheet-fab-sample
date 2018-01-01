@@ -3,22 +3,57 @@ package cl.loopa.android.materialsheet
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 
 import kotlinx.android.synthetic.main.activity_main.*
+import com.gordonwong.materialsheetfab.MaterialSheetFab
+import android.support.v7.widget.RecyclerView
+
+
+
+
 
 class MainActivity : AppCompatActivity() {
+
+    private var mRecyclerView: RecyclerView? = null
+    private val mAdapter: RecyclerView.Adapter<*>? = null
+    private var mLayoutManager: RecyclerView.LayoutManager? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
+        /*fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
-        }
+        }*/
+
+        val fab = findViewById<View>(R.id.fab) as Fab
+        val sheetView = findViewById<View>(R.id.fab_sheet)
+        val overlay = findViewById<View>(R.id.dim_overlay)
+        val sheetColor = resources.getColor(R.color.abc_background_cache_hint_selector_material_light)
+        val fabColor = resources.getColor(R.color.colorAccent)
+
+        // Initialize material sheet FAB
+        val materialSheetFab = MaterialSheetFab(fab, sheetView, overlay,
+                sheetColor, fabColor)
+
+
+       /* mRecyclerView = findViewById(R.id.fab)
+
+        mLayoutManager = new LinearLayoutManager(this)
+        mRecyclerView.setLayoutManager(mLayoutManager)
+
+        // specify an adapter (see also next example)
+        mAdapter = new MyAdapter(myDataset);
+        mRecyclerView.setAdapter(mAdapter);*/
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
