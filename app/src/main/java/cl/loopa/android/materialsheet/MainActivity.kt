@@ -1,7 +1,9 @@
 package cl.loopa.android.materialsheet
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
@@ -11,9 +13,6 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import com.gordonwong.materialsheetfab.MaterialSheetFab
 import android.support.v7.widget.RecyclerView
-
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         val fab = findViewById<View>(R.id.fab) as Fab
         val sheetView = findViewById<View>(R.id.fab_sheet)
         val overlay = findViewById<View>(R.id.dim_overlay)
-        val sheetColor = resources.getColor(R.color.abc_background_cache_hint_selector_material_light)
-        val fabColor = resources.getColor(R.color.colorAccent)
+        val sheetColor = ContextCompat.getColor(this,R.color.background_card)
+        val fabColor = ContextCompat.getColor(this,R.color.colorAccent)
 
         // Initialize material sheet FAB
         val materialSheetFab = MaterialSheetFab(fab, sheetView, overlay,
