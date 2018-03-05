@@ -2,7 +2,9 @@ package cl.loopa.android.materialsheet
 
 import android.content.Context
 import android.os.Bundle
+import android.support.annotation.Nullable
 import android.support.design.widget.Snackbar
+import android.support.v4.app.DialogFragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -13,6 +15,15 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import com.gordonwong.materialsheetfab.MaterialSheetFab
 import android.support.v7.widget.RecyclerView
+import android.widget.AdapterView
+import android.view.ContextMenu
+import android.widget.Toast
+import android.view.ViewGroup
+import android.view.LayoutInflater
+
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +31,8 @@ class MainActivity : AppCompatActivity() {
     private var mRecyclerView: RecyclerView? = null
     private val mAdapter: RecyclerView.Adapter<*>? = null
     private var mLayoutManager: RecyclerView.LayoutManager? = null
+
+    var fm = supportFragmentManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +80,21 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.action_call -> consume { navigateToSettings() }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    // https://antonioleiva.com/kotlin-awesome-tricks-for-android/
+    inline fun consume(f: () -> Unit): Boolean {
+        f()
+        return true
+    }
+
+    fun navigateToSettings(){
+        val dFragment = NrosEmergenciaFragment()
+        // Show DialogFragment
+        dFragment.show(fm, "Dialog Fragment")
+        return
     }
 }
